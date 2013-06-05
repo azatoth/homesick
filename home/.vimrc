@@ -1,20 +1,23 @@
 if v:progname =~? "evim"
   finish
 endif
-filetype off
 
 call pathogen#infect()
-call pathogen#helptags()
 
-syntax on
+let mapleader="§"
+set expandtab
+set shiftwidth=2
+set softtabstop=4
+set tabstop=4
 
-set background=dark
+
+colorscheme leo
 set nocompatible
 set backspace=indent,eol,start
-set tabstop=2
+"set tabstop=4
+"set softtabstop=4
 set number
 set nowrap
-set expandtab
 set textwidth=0
 set autoindent		" always set autoindenting on
 if has("vms")
@@ -22,6 +25,7 @@ if has("vms")
 else
   set backup		" keep a backup file
 endif
+
 if !isdirectory($HOME . "/backup")
 	call mkdir($HOME . "/backup")
 endif
@@ -30,18 +34,15 @@ if !isdirectory($HOME . "/tmp")
 	call mkdir($HOME . "/tmp")
 endif
 set dir=$HOME/tmp		"  -''-
-
 set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
 set mouse=a
+syntax on
+let b:undo_ftplugin=""
 
-augroup filetypedetect
-    au BufNewFile,BufRead *.jadd	setf java
-    au BufNewFile,BufRead *.jrag	setf java
-    au BufNewFile,BufRead *.doxygen setf doxygen
-augroup END
+let Vimplate="$HOME/bin/vimplate"
 
 if has("terminfo")
 	set t_Co=256
@@ -53,18 +54,7 @@ else
 	set t_Sb=[4%dm
 endif
 
-let mapleader="§" 
-let maplocalleader="§" 
-map Q gq
-
-vnoremap p <Esc>:let current_reg = @"<CR>gvs<C-R>=current_reg<CR><Esc>
-
-if &t_Co > 2 || has("gui_running")
-  syntax on
-  set hlsearch
-endif
-filetype plugin on
-
+filetype plugin indent on
 
 if has("autocmd")
   filetype plugin indent on
@@ -75,15 +65,23 @@ if has("autocmd")
     \ endif
 
 endif " has("autocmd")
-let g:ftplugin_sql_omni_key_right = '<Right>'
-let g:ftplugin_sql_omni_key_left  = '<Left>'
-let g:omni_sql_no_default_maps = 1
-let g:python_highlight_all = 1
-let g:indent_guides_enable_on_vim_startup = 1
-"let g:indent_guides_debug = 1
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#313331   ctermbg=3
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#181811 ctermbg=4
 
-"colorscheme ir_black
+set exrc
+set secure
+let python_highlight_all = 1
+let python_slow_sync = 1
+let g:indent_guides_color_change_percent = 5
+let g:indent_guides_guide_size = 1
+"let g:indent_guides_enable_on_vim_startup = 1
+
+set background=dark
+set foldmethod=syntax
+
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplModSelTarget = 1
+
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+
 au BufNewFile,BufReadPost *.coffee setl expandtab
