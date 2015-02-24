@@ -1,0 +1,15 @@
+#!/usr/bin/perl
+
+use File::Basename;
+use strict;
+my $this = basename($0);
+my $desktop = `xprop -root -notype  _NET_CURRENT_DESKTOP`;
+$desktop =~ s/.*?= (\d+)/$1/;
+chomp $desktop;
+$desktop = "desktop_$desktop";
+
+if(scalar @ARGV) {
+	exec "/usr/bin/$this", "--servername", $desktop, '--remote-tab-silent', @ARGV;
+} else {
+	exec "/usr/bin/$this", "--servername", $desktop;
+}

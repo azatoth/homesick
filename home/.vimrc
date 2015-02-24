@@ -15,9 +15,17 @@ Plugin 'gmarik/Vundle.vim'
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-surround'
-Plugin 'mhaig/vim-blockdiag-series'
-Plugin 'ervandew/supertab'
+Plugin 'tikhomirov/vim-glsl'
+Plugin 'avakhov/vim-yaml'
+Plugin 'artoj/qmake-syntax-vim'
+Plugin 'burnettk/vim-angular'
+Plugin 'pangloss/vim-javascript'
+Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'matthewsimo/angular-vim-snippets'
+Plugin 'claco/jasmine.vim'
+Plugin 'scrooloose/syntastic.git'
+Plugin 'digitaltoad/vim-jade'
+
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 "Plugin 'L9'
@@ -46,23 +54,27 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 "
+"
 if v:progname =~? "evim"
   finish
 endif
 
+
 let mapleader="§"
-set expandtab
-set shiftwidth=2
-set softtabstop=4
-set tabstop=4
+"set expandtab
+"set shiftwidth=2
+"set softtabstop=4
+"set tabstop=4
 
 
-colorscheme murphy
+colorscheme leo
+set nocompatible
 set backspace=indent,eol,start
 "set tabstop=4
 "set softtabstop=4
 set number
-set nowrap
+set wrap
+set linebreak
 set textwidth=0
 set autoindent		" always set autoindenting on
 if has("vms")
@@ -130,3 +142,10 @@ let g:miniBufExplModSelTarget = 1
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 
 au BufNewFile,BufReadPost *.coffee setl expandtab
+let g:localvimrc_ask = 0
+
+:let g:detectindent_preferred_expandtab = 1
+:let g:detectindent_preferred_indent = 4
+
+let g:tern_map_keys=1
+let g:tern_show_argument_hints='on_hold'

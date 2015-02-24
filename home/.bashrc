@@ -2,121 +2,93 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-# If running interactively, then:
-if [ "$PS1" ]; then
-        ulimit -c unlimited
-        export PATH=$HOME/bin:/var/lib/gems/1.8/bin:$PATH
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
 
-        # don't put duplicate lines in the history. See bash(1) for more options
-        export HISTCONTROL=ignoredups
+export TERM="xterm-256color"
 
-        # check the window size after each command and, if necessary,
-        # update the values of LINES and COLUMNS.
-        shopt -s checkwinsize
+# don't put duplicate lines in the history. See bash(1) for more options
+# don't overwrite GNU Midnight Commander's setting of `ignorespace'.
+HISTCONTROL=$HISTCONTROL${HISTCONTROL+:}ignoredups
+# ... or force ignoredups and ignorespace
+HISTCONTROL=ignoreboth
 
-        # Set PKG_CONFIG_PATH to handle local also
+# append to the history file, don't overwrite it
+shopt -s histappend
 
-        export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/lib/pkgconfig:/usr/X11R6/lib/pkgconfig
-        #export CC="ccache gcc"
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 
-		# set variable identifying the chroot you work in (used in the prompt below)
-		if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
-			debian_chroot=$(cat /etc/debian_chroot)
-		fi
-        # enable color support of ls and also add handy aliases
-        if [ "$TERM" != "dumb" ]; then
-                eval `dircolors -b`
-                alias ls='ls --color=always'
-                alias dir='ls --color=always --format=vertical'
-                alias vdir='ls --color=always --format=long'
-        fi
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
 
-		alias svn-grep='grep --exclude-dir=".svn"'
-        # some more ls aliases
-        alias ll='ls -l'
-        alias la='ls -A'
-        alias l='ls -CF'
-        alias lsd='ls -d *'
-        hcat()
-        {
-                lynx -dump $1 | cat;
-        }
-        hless()
-        {
-                lynx -dump $1 | less;
-        }
-        # some other alias
-        alias s='cd ..'
-        alias rm='rm -i'
-        alias df='df -h'
-        alias DF="df -h 2>&- | grep --regexp='^\/dev' | xargs -0 echo -ne \"Filesystem Size Used Avail Use% Mountpoint\n\" | column -t"
+# make less more friendly for non-text input files, see lesspipe(1)
+#[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-        alias cvsstatus="cvs status | grep Status | grep -v 'Up-to-date'"
-
-
-        # set a fancy prompt
-        # [suspended:return_value][username@short_host dir]$ 
-        # red-underline for root
-        CLEAR="\[\e[0m\]"
-        DARK_CYAN="\[\e[0;36m\]"
-        LIGHT_CYAN="\[\e[1;36m\]"
-        DARK_MAGENTA="\[\e[0;35m\]"
-        DARK_GREEN="\[\e[0;32m\]"
-        LIGHT_GREEN="\[\e[1;32m\]"
-        LIGHT_YELLOW="\[\e[1;33m\]"
-        LIGHT_BLUE="\[\e[1;34m\]"
-        LIGHT_RED_UNDERLINE="\[\e[1;4;31;31m\]"
-
-        case `id -u` in
-                0) _uid=$LIGHT_RED_UNDERLINE"\u";;
-                *) _uid=$LIGHT_GREEN"\u";;
-        esac
-
-PS1=${debian_chroot:+($debian_chroot)}\
-$DARK_MAGENTA"["\
-$DARK_CYAN"\j"\
-$DARK_MAGENTA":"\
-$DARK_CYAN"\$?"\
-$DARK_MAGENTA"]"\
-$DARK_GREEN"["\
-$_uid\
-$LIGHT_BLUE"@"\
-$LIGHT_GREEN"\h"\
-$LIGHT_YELLOW" \W"\
-$DARK_GREEN"]"\
-'$(__git_ps1 " «%s»")'\
-$LIGHT_CYAN"\$ "\
-$CLEAR
-
-        # $_topic
-
-
-        # enable programmable completion features (you don't need to enable
-        # this, if it's already enabled in /etc/bash.bashrc).
-        if [ -f /etc/bash_completion ]; then
-                . /etc/bash_completion
-        fi
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
 fi
-export GIT_PS1_SHOWDIRTYSTATE=1
-export GIT_PS1_SHOWSTASHSTATE=1
-export GIT_PS1_SHOWUNTRACKEDFILES=1
-export GIT_PS1_SHOWUPSTREAM="verbose git"
 
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm*) color_prompt=yes;;
+esac
 
-export EMAIL="carl@excito.com"
-export DEBFULLNAME="Carl Fürstenberg"
-export PATH="/usr/lib/ccache:$PATH"
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+#force_color_prompt=yes
 
-export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::") 
-export AWS_RDS_HOME="$HOME/RDSCli"
-export PATH=$PATH:$AWS_RDS_HOME/bin
-export EC2_REGION=eu-west-1
-export AWS_CREDENTIAL_FILE=$AWS_RDS_HOME/.credentials
-export EC2_HOME=~/.ec2
-KEYNAME=OP6GYEFRZBIEEN6LEIMGZ5RNGJ3CDNGV
-export EC2_PRIVATE_KEY=$EC2_HOME/pk-$KEYNAME.pem
-export EC2_CERT=$EC2_HOME/cert-$KEYNAME.pem
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+	# We have color support; assume it's compliant with Ecma-48
+	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+	# a case would tend to support setf rather than setaf.)
+	color_prompt=yes
+    else
+	color_prompt=
+    fi
+fi
+
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 " «%s»")\$ '
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+unset color_prompt force_color_prompt
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWSTASHSTATE=1
+GIT_PS1_SHOWUNTRACKEDFILES=1
+GIT_PS1_SHOWUPSTREAM="git verbose"
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
+
+# load local definitions
+if [ -f ~/.bashrc_local ]; then
+    . ~/.bashrc_local
+fi
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

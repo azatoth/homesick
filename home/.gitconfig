@@ -1,5 +1,48 @@
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+[color]
+	ui = auto
+	branch = auto
+	diff = auto
+	grep = auto
+	decorate = auto
+	interactive = auto
+	showbranch = auto
+	status = auto
+[color "diff"]
+	whitespace = red reverse
+[core]
+	whitespace=-indent-with-non-tab,trailing-space,cr-at-eol,space-before-tab
+	pager = less -+$LESS -R
 [alias]
 	st = status
-	co = checkout
 	ci = commit
+	br = branch
+	co = checkout
+	df = diff
+	lg = log -p
 	b = branch
+[merge]
+	tool = meld
+	conflictstyle = diff3
+[user]
+	name = Carl Fürstenberg
+[apply]
+	whitespace = fix
+[tar "tar.xz"]
+	command = xz -c
+[push]
+	default = simple
+[include]
+	path = ~/.gitconfig.local
