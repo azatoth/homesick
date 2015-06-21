@@ -47,6 +47,12 @@ NeoBundle 'matthewsimo/angular-vim-snippets'
 
 NeoBundle 'Shougo/vimshell'
 
+NeoBundle 'scrooloose/nerdtree'
+
+NeoBundle 'Xuyuanp/nerdtree-git-plugin'
+NeoBundle 'jistr/vim-nerdtree-tabs'
+NeoBundle 'airblade/vim-gitgutter'
+
 " Required:
 call neobundle#end()
 
@@ -191,3 +197,7 @@ let g:neosnippet#enable_snipmate_compatibility = 1
 
 " Tell Neosnippet about the other snippets
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+map <C-n> :NERDTreeToggle<CR>
