@@ -8,11 +8,11 @@ if has('vim_starting')
   endif
 
   " Required:
-  set runtimepath+=/home/azatoth/.vim/bundle/neobundle.vim/
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
 " Required:
-call neobundle#begin(expand('/home/azatoth/.vim/bundle'))
+call neobundle#begin(expand('~/.vim/bundle'))
 
 " Let NeoBundle manage NeoBundle
 " Required:
@@ -35,8 +35,6 @@ NeoBundle 'scrooloose/syntastic.git'
 NeoBundle 'digitaltoad/vim-jade'
 NeoBundleLazy 'othree/yajs', {'autoload':{'filetypes':['javascript', 'es6']}}
 NeoBundle 'moll/vim-node'
-NeoBundle 'maksimr/vim-jsbeautify'
-NeoBundle 'einars/js-beautify'
 
 NeoBundle 'Shougo/neocomplete'
 
@@ -52,6 +50,8 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'Xuyuanp/nerdtree-git-plugin'
 NeoBundle 'jistr/vim-nerdtree-tabs'
 NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'mattn/emmet-vim'
+NeoBundle 'Chiel92/vim-autoformat'
 
 " Required:
 call neobundle#end()
@@ -187,10 +187,8 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)"
 \: "\<TAB>"
 
-" For snippet_complete marker.
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
+set conceallevel=0
+set nofoldenable
 
 " Enable snipMate compatibility feature.
 let g:neosnippet#enable_snipmate_compatibility = 1
@@ -201,3 +199,4 @@ let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 map <C-n> :NERDTreeToggle<CR>
+noremap <c-f> :Autoformat<CR>
