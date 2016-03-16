@@ -25,6 +25,7 @@
 [core]
 	whitespace=-indent-with-non-tab,trailing-space,cr-at-eol,space-before-tab
 	pager = less -+$LESS -R
+	quotepath = false
 [alias]
 	st = status
 	ci = commit

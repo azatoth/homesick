@@ -24,3 +24,7 @@ indent_style = space
 indent_size = 2
 max_char = 78
 brace_style = expand
+
+[*.jade]
+indent_style = space
+indent_size = 2

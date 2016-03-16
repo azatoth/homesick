@@ -35,11 +35,14 @@ NeoBundle 'scrooloose/syntastic.git'
 NeoBundle 'digitaltoad/vim-jade'
 NeoBundleLazy 'othree/yajs', {'autoload':{'filetypes':['javascript', 'es6']}}
 NeoBundle 'moll/vim-node'
+NeoBundle 'maksimr/vim-jsbeautify'
+NeoBundle 'einars/js-beautify'
 
 NeoBundle 'Shougo/neocomplete'
 
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'Shougo/context_filetype.vim'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'matthewsimo/angular-vim-snippets'
 
@@ -52,6 +55,10 @@ NeoBundle 'jistr/vim-nerdtree-tabs'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'Chiel92/vim-autoformat'
+NeoBundle 'elzr/vim-json'
+NeoBundle 'nathanaelkane/vim-indent-guides'
+"NeoBundle 'mmozuras/snipmate-mocha'
+
 
 " Required:
 call neobundle#end()
@@ -134,6 +141,8 @@ endif " has("autocmd")
 
 set exrc
 set secure
+let g:vim_json_syntax_conceal = 0
+
 let python_highlight_all = 1
 let python_slow_sync = 1
 let g:indent_guides_color_change_percent = 5
@@ -194,9 +203,19 @@ set nofoldenable
 let g:neosnippet#enable_snipmate_compatibility = 1
 
 " Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+"      \ '~/.vim/snippets/snipmate-mocha/snippets',
+let g:neosnippet#snippets_directory=[
+      \ '~/.vim/snippets/vim-snippets/snippets',
+      \ '~/.vim/snippets/angular-vim-snippets/snippets'
+      \]
 
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 map <C-n> :NERDTreeToggle<CR>
+
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_color_change_percent = 2
+let g:indent_guides_guide_size = 2
+let g:indent_guides_start_level = 2
+
 noremap <c-f> :Autoformat<CR>
