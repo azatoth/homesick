@@ -19,6 +19,8 @@ call neobundle#begin(expand('~/.vim/bundle'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Add or remove your Bundles here:
+NeoBundle 'vim-scripts/dbext.vim'
+NeoBundle 'vim-scripts/SQLUtilities'
 NeoBundle 'ctrlpvim/ctrlp.vim'
 NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'tpope/vim-fugitive'
@@ -27,14 +29,18 @@ NeoBundle 'tikhomirov/vim-glsl'
 NeoBundle 'avakhov/vim-yaml'
 NeoBundle 'artoj/qmake-syntax-vim'
 NeoBundle 'burnettk/vim-angular'
-NeoBundle 'pangloss/vim-javascript'
+"NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'othree/javascript-libraries-syntax.vim'
 NeoBundle 'claco/jasmine.vim'
-NeoBundle 'scrooloose/syntastic.git'
+NeoBundle 'vim-syntastic/syntastic'
 NeoBundle 'digitaltoad/vim-jade'
-NeoBundleLazy 'othree/yajs', {'autoload':{'filetypes':['javascript', 'es6']}}
+"NeoBundle 'othree/yajs.vim'
+NeoBundle 'isRuslan/vim-es6'
+
+"NeoBundleLazy 'othree/yajs', {'autoload':{'filetypes':['javascript', 'es6']}}
 NeoBundle 'moll/vim-node'
+NeoBundle 'millermedeiros/vim-esformatter'
 NeoBundle 'maksimr/vim-jsbeautify'
 NeoBundle 'einars/js-beautify'
 
@@ -58,6 +64,10 @@ NeoBundle 'Chiel92/vim-autoformat'
 NeoBundle 'elzr/vim-json'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 "NeoBundle 'mmozuras/snipmate-mocha'
+NeoBundle "Konfekt/FastFold"
+NeoBundle "briancollins/vim-jst"
+NeoBundle 'bbchung/clighter8'
+NeoBundle 'chrisbra/csv.vim'
 
 
 " Required:
@@ -209,6 +219,7 @@ let g:neosnippet#snippets_directory=[
       \ '~/.vim/snippets/angular-vim-snippets/snippets'
       \]
 
+let b:neosnippet_disable_snippet_triggers = ['fname', 'path', 'filename']
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 map <C-n> :NERDTreeToggle<CR>
@@ -219,3 +230,38 @@ let g:indent_guides_guide_size = 2
 let g:indent_guides_start_level = 2
 
 noremap <c-f> :Autoformat<CR>
+
+autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+"autocmd FileType javascript nnoremap <buffer> <c-f> :Esformatter<CR>
+autocmd FileType html nnoremap <buffer> <c-f> :call HtmlBeautify()<cr>
+autocmd FileType css nnoremap <buffer> <c-f> :call CSSBeautify()<cr>
+autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
+"autocmd FileType javascript vnoremap <buffer> <c-f> :EsformatterVisual<CR>
+autocmd FileType html vnoremap <buffer> <c-f> :call RangeHtmlBeautify()<cr>
+autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_loc_list_height = 5
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
+let g:syntastic_javascript_checkers = ['eslint']
+
+let g:syntastic_error_symbol = '❌'
+let g:syntastic_style_error_symbol = '⁉️'
+let g:syntastic_warning_symbol = '⚠️'
+let g:syntastic_style_warning_symbol = '💩'
+
+highlight link SyntasticErrorSign SignColumn
+highlight link SyntasticWarningSign SignColumn
+highlight link SyntasticStyleErrorSign SignColumn
+highlight link SyntasticStyleWarningSign SignColumn
+
+nmap <silent> <Leader>r :ClRenameCursor<CR>
+
+let g:csv_highlight_column = 'y'
+let g:csv_autocmd_arrange = 1
