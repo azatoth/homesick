@@ -68,6 +68,7 @@ NeoBundle "Konfekt/FastFold"
 NeoBundle "briancollins/vim-jst"
 NeoBundle 'bbchung/clighter8'
 NeoBundle 'chrisbra/csv.vim'
+NeoBundle 'python-mode/python-mode'
 
 
 " Required:
@@ -265,3 +266,7 @@ nmap <silent> <Leader>r :ClRenameCursor<CR>
 
 let g:csv_highlight_column = 'y'
 let g:csv_autocmd_arrange = 1
+
+let g:pymode_options_max_line_length = 120
+let g:formatters_python = ['yapf']
+let g:formatter_yapf_style = 'google'

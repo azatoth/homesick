@@ -99,3 +99,6 @@ if [ -d "/usr/lib/ccache" ]; then
   export PATH="/usr/lib/ccache:$PATH"
   export GCC_COLORS="error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01"
 fi
+
+export WORKON_HOME=$HOME/.virtualenv
+source $HOME/.local/bin/virtualenvwrapper_lazy.sh
