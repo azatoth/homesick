@@ -68,7 +68,9 @@ NeoBundle "Konfekt/FastFold"
 NeoBundle "briancollins/vim-jst"
 NeoBundle 'bbchung/clighter8'
 NeoBundle 'chrisbra/csv.vim'
+"NeoBundle 'python-rope/ropevim'
 NeoBundle 'python-mode/python-mode'
+NeoBundle 'fisadev/vim-isort'
 
 
 " Required:
@@ -270,3 +272,13 @@ let g:csv_autocmd_arrange = 1
 let g:pymode_options_max_line_length = 120
 let g:formatters_python = ['yapf']
 let g:formatter_yapf_style = 'google'
+
+let g:pymode_rope = 1
+let g:pymode_rope_autoimport=1
+let g:pymode_doc = 0
+let g:pymode_rope_vim_completion=0
+let g:pymode_rope_complete_on_dot = 0
+let g:pymode_rope_autoimport_modules = ["os", "shutil"]
+autocmd FileType python setlocal omnifunc=python3complete#Complete
+
+let g:NERDTreeUpdateOnWrite = 0
