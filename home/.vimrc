@@ -253,6 +253,7 @@ let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_python_checkers = ['flake8']
 
 let g:syntastic_error_symbol = '❌'
 let g:syntastic_style_error_symbol = '⁉️'
@@ -271,9 +272,15 @@ let g:csv_autocmd_arrange = 1
 
 let g:pymode_options_max_line_length = 120
 let g:formatters_python = ['yapf']
+
+let g:formatdef_yapf = "'yapf --style=\"{dedent_closing_brackets:true,based_on_style:'.g:formatter_yapf_style.',indent_width:'.&shiftwidth.(&textwidth ? ',column_limit:'.&textwidth : '').'}\" -l '.a:firstline.'-'.a:lastline"
 let g:formatter_yapf_style = 'google'
 
 let g:pymode_rope = 1
+let g:pymode_lint = 1
+let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
+
+set completeopt=menu
 let g:pymode_rope_autoimport=1
 let g:pymode_doc = 0
 let g:pymode_rope_vim_completion=0
