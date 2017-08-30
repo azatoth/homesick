@@ -1,88 +1,64 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-"NeoBundle Scripts-----------------------------
-if has('vim_starting')
-  if &compatible
-    set nocompatible               " Be iMproved
-  endif
-
-  " Required:
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" Required:
-call neobundle#begin(expand('~/.vim/bundle'))
-
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
+call plug#begin('~/.vim/bundle')
 
 " Add or remove your Bundles here:
-NeoBundle 'vim-scripts/dbext.vim'
-NeoBundle 'vim-scripts/SQLUtilities'
-NeoBundle 'ctrlpvim/ctrlp.vim'
-NeoBundle 'flazz/vim-colorschemes'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tpope/vim-rails'
-NeoBundle 'tikhomirov/vim-glsl'
-NeoBundle 'avakhov/vim-yaml'
-NeoBundle 'artoj/qmake-syntax-vim'
-NeoBundle 'burnettk/vim-angular'
-"NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'othree/javascript-libraries-syntax.vim'
-NeoBundle 'claco/jasmine.vim'
-NeoBundle 'vim-syntastic/syntastic'
-NeoBundle 'digitaltoad/vim-jade'
-"NeoBundle 'othree/yajs.vim'
-NeoBundle 'isRuslan/vim-es6'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'flazz/vim-colorschemes'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rails'
+Plug 'tikhomirov/vim-glsl'
+Plug 'avakhov/vim-yaml'
+Plug 'artoj/qmake-syntax-vim'
+Plug 'burnettk/vim-angular'
+Plug 'kchmck/vim-coffee-script'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'claco/jasmine.vim'
+Plug 'vim-syntastic/syntastic'
+Plug 'digitaltoad/vim-jade'
+Plug 'isRuslan/vim-es6'
+Plug 'moll/vim-node'
+Plug 'millermedeiros/vim-esformatter'
+Plug 'maksimr/vim-jsbeautify'
+Plug 'einars/js-beautify'
+Plug 'Shougo/neocomplete'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'Shougo/context_filetype.vim'
+Plug 'honza/vim-snippets'
+Plug 'matthewsimo/angular-vim-snippets'
+Plug 'Shougo/vimshell'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'airblade/vim-gitgutter'
+Plug 'mattn/emmet-vim'
+Plug 'Chiel92/vim-autoformat'
+Plug 'elzr/vim-json'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'Konfekt/FastFold'
+Plug 'briancollins/vim-jst'
+Plug 'bbchung/clighter8'
+Plug 'chrisbra/csv.vim'
+Plug 'python-mode/python-mode'
+Plug 'fisadev/vim-isort'
+Plug 'sophacles/vim-bundle-mako'
+Plug 'ternjs/tern_for_vim'
+"Plug 'xolox/vim-misc'
+"Plug 'xolox/vim-colorscheme-switcher'
+Plug 'Glench/Vim-Jinja2-Syntax'
 
-"NeoBundleLazy 'othree/yajs', {'autoload':{'filetypes':['javascript', 'es6']}}
-NeoBundle 'moll/vim-node'
-NeoBundle 'millermedeiros/vim-esformatter'
-NeoBundle 'maksimr/vim-jsbeautify'
-NeoBundle 'einars/js-beautify'
-
-NeoBundle 'Shougo/neocomplete'
-
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'Shougo/context_filetype.vim'
-NeoBundle 'honza/vim-snippets'
-NeoBundle 'matthewsimo/angular-vim-snippets'
-
-NeoBundle 'Shougo/vimshell'
-
-NeoBundle 'scrooloose/nerdtree'
-
-NeoBundle 'Xuyuanp/nerdtree-git-plugin'
-NeoBundle 'jistr/vim-nerdtree-tabs'
-NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'mattn/emmet-vim'
-NeoBundle 'Chiel92/vim-autoformat'
-NeoBundle 'elzr/vim-json'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-"NeoBundle 'mmozuras/snipmate-mocha'
-NeoBundle "Konfekt/FastFold"
-NeoBundle "briancollins/vim-jst"
-NeoBundle 'bbchung/clighter8'
-NeoBundle 'chrisbra/csv.vim'
-"NeoBundle 'python-rope/ropevim'
-NeoBundle 'python-mode/python-mode'
-NeoBundle 'fisadev/vim-isort'
-
-
-" Required:
-call neobundle#end()
+call plug#end()
 
 " Required:
 filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-"End NeoBundle Scripts-------------------------
 
 if v:progname =~? "evim"
   finish
@@ -249,11 +225,12 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_loc_list_height = 5
-let g:syntastic_auto_loc_list = 0
+let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_aggregate_errors = 1
 
 let g:syntastic_error_symbol = '❌'
 let g:syntastic_style_error_symbol = '⁉️'
@@ -273,12 +250,12 @@ let g:csv_autocmd_arrange = 1
 let g:pymode_options_max_line_length = 120
 let g:formatters_python = ['yapf']
 
-let g:formatdef_yapf = "'yapf --style=\"{dedent_closing_brackets:true,based_on_style:'.g:formatter_yapf_style.',indent_width:'.&shiftwidth.(&textwidth ? ',column_limit:'.&textwidth : '').'}\" -l '.a:firstline.'-'.a:lastline"
+let g:formatdef_yapf = "'yapf --style=\"{split_penalty_excess_character:100, dedent_closing_brackets:true,based_on_style:'.g:formatter_yapf_style.',indent_width:'.&shiftwidth.(&textwidth ? ',column_limit:'.&textwidth : '').'}\" -l '.a:firstline.'-'.a:lastline"
 let g:formatter_yapf_style = 'google'
 
 let g:pymode_rope = 1
-let g:pymode_lint = 1
-let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
+let g:pymode_lint = 0
+let g:pymode_lint_checkers = ['pyflakes3', 'pep8', 'mccabe']
 
 set completeopt=menu
 let g:pymode_rope_autoimport=1
@@ -289,3 +266,6 @@ let g:pymode_rope_autoimport_modules = ["os", "shutil"]
 autocmd FileType python setlocal omnifunc=python3complete#Complete
 
 let g:NERDTreeUpdateOnWrite = 0
+
+set number
+set relativenumber
