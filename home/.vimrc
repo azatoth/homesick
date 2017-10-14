@@ -14,6 +14,9 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-sensible'
 Plug 'tikhomirov/vim-glsl'
 Plug 'avakhov/vim-yaml'
 Plug 'artoj/qmake-syntax-vim'
@@ -54,6 +57,10 @@ Plug 'ternjs/tern_for_vim'
 "Plug 'xolox/vim-misc'
 "Plug 'xolox/vim-colorscheme-switcher'
 Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'digitalrounin/vim-yaml-folds'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
 
 call plug#end()
 
@@ -230,6 +237,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_python_flake8_post_args='--max-line-length=120'
 let g:syntastic_aggregate_errors = 1
 
 let g:syntastic_error_symbol = '❌'
@@ -267,5 +275,7 @@ autocmd FileType python setlocal omnifunc=python3complete#Complete
 
 let g:NERDTreeUpdateOnWrite = 0
 
+" none|es5|all
+let g:prettier#config#trailing_comma = 'es5'
 set number
 set relativenumber

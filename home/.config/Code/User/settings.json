@@ -1,0 +1,7 @@
+{
+    "vim.disableAnnoyingNeovimMessage": true,
+    "python.formatting.provider": "yapf",
+    "workbench.colorTheme": "Monokai Dimmed",
+    "python.linting.flake8Enabled": true,
+    "python.linting.pylintEnabled": false
+}
