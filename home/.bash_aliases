@@ -21,3 +21,8 @@ alias s='cd ..'
 
 alias rm='rm -i'
 alias df='df -h'
+
+# We have hub installed
+if which hub > /dev/null; then
+  eval "$(hub alias -s)"
+fi

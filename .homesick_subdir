@@ -1,3 +1,4 @@
 bin
 .vim/colors
 .config/Code/User
+.vim/after/plugin
