@@ -26,3 +26,13 @@ alias df='df -h'
 if which hub > /dev/null; then
   eval "$(hub alias -s)"
 fi
+
+# runs an npm script via lerna for a the current module
+alias lr='lerna run --stream --scope $(node -p "require(\"./package.json\").name")'
+
+# runs "yarn build" (build + test) for the current module
+alias lb='lr build'
+alias lt='lr test'
+
+# runs "yarn watch" for the current module (recommended to run in a separate terminal session):
+alias lw='lr watch'
