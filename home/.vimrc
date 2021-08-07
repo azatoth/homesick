@@ -20,7 +20,7 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-abolish'
 Plug 'beanworks/vim-phpfmt'
 Plug 'tikhomirov/vim-glsl'
-Plug 'avakhov/vim-yaml'
+Plug 'stephpy/vim-yaml'
 Plug 'artoj/qmake-syntax-vim'
 Plug 'burnettk/vim-angular'
 Plug 'kchmck/vim-coffee-script'
@@ -52,7 +52,7 @@ Plug 'Konfekt/FastFold'
 Plug 'briancollins/vim-jst'
 Plug 'bbchung/clighter8'
 Plug 'chrisbra/csv.vim'
-Plug 'python-mode/python-mode'
+Plug 'python-mode/python-mode', { 'branch': 'develop' }
 Plug 'fisadev/vim-isort'
 Plug 'sophacles/vim-bundle-mako'
 Plug 'ternjs/tern_for_vim'
@@ -65,6 +65,8 @@ Plug 'digitalrounin/vim-yaml-folds'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
+Plug 'hashivim/vim-terraform'
+
 
 call plug#end()
 
@@ -267,8 +269,8 @@ let g:formatter_yapf_style = 'google'
 
 let g:pymode_rope = 1
 let g:pymode_lint = 0
-let g:pymode_lint_checkers = ['pyflakes3', 'pep8', 'mccabe']
-
+let g:pymode_lint_checkers = ['flake8']
+let g:pymode_python = 'python3'
 set completeopt=menu
 let g:pymode_rope_autoimport=1
 let g:pymode_doc = 0
@@ -277,7 +279,7 @@ let g:pymode_rope_complete_on_dot = 0
 let g:pymode_rope_autoimport_modules = ["os", "shutil"]
 autocmd FileType python setlocal omnifunc=python3complete#Complete
 
-let g:NERDTreeUpdateOnWrite = 0
+let g:NERDTreeGitStatusUpdateOnWrite = 0
 
 " none|es5|all
 let g:prettier#config#trailing_comma = 'es5'
