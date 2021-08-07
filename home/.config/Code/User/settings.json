@@ -1,7 +1,152 @@
 {
-    "vim.disableAnnoyingNeovimMessage": true,
-    "python.formatting.provider": "yapf",
-    "workbench.colorTheme": "Monokai Dimmed",
+    "C_Cpp.updateChannel": "Insiders",
+    "[dockerfile]": {
+        "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+    },
+    "[graphql]": {
+        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    },
+    "[java]": {},
+    "[javascript]": {
+        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    },
+    "[shellscript]": {
+        "editor.defaultFormatter": "foxundermoon.shell-format"
+    },
+    "[sql]": {},
+    "[typescript]": {
+        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    },
+    "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "breadcrumbs.enabled": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "editor.tabSize": 2,
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact"
+    ],
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "extensions.ignoreRecommendations": false,
+    "files.associations": {
+        "**/.ebextensions/*.config": "yaml"
+    },
+    "files.exclude": {
+        "**/.DS_Store": true,
+        "**/.classpath": true,
+        "**/.factorypath": true,
+        "**/.git": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/node_modules": true
+    },
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "nunjucksFormat.spaceclose": true,
+    "python.formatting.blackArgs": [
+        "--line-length=88",
+        "--skip-string-normalization"
+    ],
+    "python.formatting.provider": "black",
+    "python.languageServer": "Pylance",
+    "python.linting.flake8Args": [
+        "--max-line-length=90"
+    ],
     "python.linting.flake8Enabled": true,
-    "python.linting.pylintEnabled": false
+    "python.linting.pylintEnabled": false,
+    "python.pythonPath": "/usr/local/bin/python3.6",
+    "python.showStartPage": false,
+    "workbench.iconTheme": "material-icon-theme",
+    "redhat.telemetry.enabled": false,
+    "tsco.addRegionCaptionToRegionEnd": false,
+    "tsco.addRowNumberInRegionName": false,
+    "tsco.memberOrder": [
+        {
+            "caption": "Properties",
+            "memberTypes": [
+                "publicStaticConstProperties",
+                "publicConstProperties",
+                "publicStaticReadOnlyProperties",
+                "publicReadOnlyProperties",
+                "publicStaticProperties",
+                "publicProperties",
+                "protectedStaticConstProperties",
+                "protectedConstProperties",
+                "protectedStaticReadOnlyProperties",
+                "protectedReadOnlyProperties",
+                "protectedStaticProperties",
+                "protectedProperties",
+                "privateStaticConstProperties",
+                "privateConstProperties",
+                "privateStaticReadOnlyProperties",
+                "privateReadOnlyProperties",
+                "privateStaticProperties",
+                "privateProperties"
+            ]
+        },
+        {
+            "caption": "Constructors",
+            "memberTypes": [
+                "constructors"
+            ]
+        },
+        {
+            "caption": "Indexers",
+            "memberTypes": [
+                "publicStaticIndexes",
+                "publicIndexes",
+                "publicAbstractIndexes",
+                "protectedStaticIndexes",
+                "protectedIndexes",
+                "protectedAbstractIndexes",
+                "privateStaticIndexes",
+                "privateIndexes",
+                "privateAbstractIndexes"
+            ]
+        },
+        {
+            "caption": "Methods",
+            "memberTypes": [
+                "publicStaticMethods",
+                "publicMethods",
+                "publicAbstractMethods",
+                "protectedStaticMethods",
+                "protectedMethods",
+                "protectedAbstractMethods",
+                "privateStaticMethods",
+                "privateMethods",
+                "privateAbstractMethods"
+            ]
+        }
+    ],
+    "tsco.useRegions": false,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "update.mode": "manual",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "window.titleBarStyle": "custom",
+    "workbench.colorTheme": "Monokai Dimmed",
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
+    "workbench.list.automaticKeyboardNavigation": false,
+    "editor.suggestSelection": "first",
+    "[json]": {
+        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    },
+    "javascript.suggest.completeFunctionCalls": true,
+    "typescript.suggest.completeFunctionCalls": true,
+    "security.workspace.trust.untrustedFiles": "open"
+}
+    "workbench.colorTheme": "Visual Studio Dark"
 }
