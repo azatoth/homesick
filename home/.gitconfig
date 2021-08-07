@@ -50,3 +50,8 @@
 	path = ~/.gitconfig.local
 [fetch]
 	prune = true
+[credential]
+	helper = !aws --profile ps-sandbox codecommit credential-helper $@
+	UseHttpPath = true
+[cola]
+	spellcheck = false
